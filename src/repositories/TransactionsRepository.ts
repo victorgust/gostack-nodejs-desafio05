@@ -73,6 +73,7 @@ class TransactionsRepository {
     );
 
     */
+
     const balance: Balance = {
       income: valIncome,
       outcome: valOutcome,
@@ -85,7 +86,7 @@ class TransactionsRepository {
   public create({ title, value, type }: CreateTransaction): Transaction {
     const balance: Balance = this.getBalance();
 
-    if (balance.income !== 0 && balance.total < value) {
+    if (type === 'outcome' && balance.total < value) {
       throw Error(`Don't have enough balance`);
     }
 
